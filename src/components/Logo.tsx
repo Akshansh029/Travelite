@@ -1,8 +1,15 @@
 import React from "react";
 import Image from "next/image";
 
-const Logo = () => {
-  return <Image src="/logo.svg" alt="Travelite Logo" width={60} height={60} />;
+interface Props {
+  width: number;
+  height: number;
+}
+
+const Logo = ({ width, height }: Props) => {
+  return (
+    <Image src="/logo.svg" alt="Travelite Logo" width={width} height={height} />
+  );
 };
 
 export default Logo;

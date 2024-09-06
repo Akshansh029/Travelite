@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { LayoutGrid } from "../components/ui/layout-grid";
+import { Button } from "./ui/button";
 
 export function LayoutGridDemo() {
   return (
@@ -13,14 +14,20 @@ export function LayoutGridDemo() {
 const SkeletonOne = () => {
   return (
     <div>
-      <p className="font-bold md:text-4xl text-xl text-white">
-        House in the woods
+      <p className="font-bold md:text-2xl text-lg text-white">
+        Majestic Peaks of Himachal Pradesh
       </p>
-      <p className="font-normal text-base text-white"></p>
       <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-        A serene and tranquil retreat, this house in the woods offers a peaceful
-        escape from the hustle and bustle of city life.
+        Embrace adventure and breathtaking views in Himachal Pradesh, where
+        snow-capped mountains, lush valleys, and charming hill stations await
+        your exploration.
       </p>
+      <Button
+        variant={"destructive"}
+        className="bg-purple-600 hover:bg-indigo-600"
+      >
+        View trip
+      </Button>
     </div>
   );
 };
@@ -28,43 +35,60 @@ const SkeletonOne = () => {
 const SkeletonTwo = () => {
   return (
     <div>
-      <p className="font-bold md:text-4xl text-xl text-white">
-        House above the clouds
+      <p className="font-bold md:text-2xl text-lg text-white">
+        Serene Serenity in Kerala
       </p>
-      <p className="font-normal text-base text-white"></p>
       <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-        Perched high above the world, this house offers breathtaking views and a
-        unique living experience. It&apos;s a place where the sky meets home,
-        and tranquility is a way of life.
+        Escape to the lush backwaters and tranquil houseboats of Kerala, where
+        you can unwind amidst serene landscapes and rejuvenate with Ayurvedic
+        treatments.
       </p>
+      <Button
+        variant={"destructive"}
+        className="bg-purple-600 hover:bg-indigo-600"
+      >
+        View trip
+      </Button>
     </div>
   );
 };
 const SkeletonThree = () => {
   return (
     <div>
-      <p className="font-bold md:text-4xl text-xl text-white">
-        Greens all over
+      <p className="font-bold md:text-2xl text-lg text-white">
+        Golden Sands of Goa
       </p>
-      <p className="font-normal text-base text-white"></p>
       <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-        A house surrounded by greenery and nature&apos;s beauty. It&apos;s the
-        perfect place to relax, unwind, and enjoy life.
+        Immerse yourself in Goa’s vibrant beaches and lively nightlife, where
+        golden sands meet azure waters, offering a perfect blend of relaxation
+        and excitement.
       </p>
+      <Button
+        variant={"destructive"}
+        className="bg-purple-600 hover:bg-indigo-600"
+      >
+        View trip
+      </Button>
     </div>
   );
 };
 const SkeletonFour = () => {
   return (
     <div>
-      <p className="font-bold md:text-4xl text-xl text-white">
-        Rivers are serene
+      <p className="font-bold md:text-2xl text-lg text-white">
+        Timeless Wonders of Rajasthan
       </p>
-      <p className="font-normal text-base text-white"></p>
       <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-        A house by the river is a place of peace and tranquility. It&apos;s the
-        perfect place to relax, unwind, and enjoy life.
+        Step into a world of regal splendor and vibrant culture in Rajasthan,
+        with its majestic forts, colorful markets, and timeless desert
+        landscapes.
       </p>
+      <Button
+        variant={"destructive"}
+        className="bg-purple-600 hover:bg-indigo-600"
+      >
+        View trip
+      </Button>
     </div>
   );
 };
@@ -75,27 +99,27 @@ const cards = [
     content: <SkeletonOne />,
     className: "md:col-span-2",
     thumbnail:
-      "https://images.unsplash.com/photo-1476231682828-37e571bc172f?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.pexels.com/photos/2961109/pexels-photo-2961109.jpeg",
   },
   {
     id: 2,
     content: <SkeletonTwo />,
     className: "col-span-1",
     thumbnail:
-      "https://images.unsplash.com/photo-1464457312035-3d7d0e0c058e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.pexels.com/photos/13691356/pexels-photo-13691356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: 3,
     content: <SkeletonThree />,
     className: "col-span-1",
     thumbnail:
-      "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.pexels.com/photos/27869489/pexels-photo-27869489/free-photo-of-peaceful-sunset-in-goa-02.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: 4,
     content: <SkeletonFour />,
     className: "md:col-span-2",
     thumbnail:
-      "https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.pexels.com/photos/9179927/pexels-photo-9179927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
 ];

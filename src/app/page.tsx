@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { useRef } from "react";
 import { LayoutGridDemo } from "@/components/LayoutGrid";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const ref1 = useRef(null);
@@ -97,7 +98,7 @@ export default function Home() {
       </motion.section>
       <section
         ref={ref1}
-        className="hero px-4 md:px-20 min-h-screen flex flex-col items-center justify-center gap-5 text-center overflow-y-hidden"
+        className="hero px-8 md:px-20 min-h-screen flex flex-col items-center justify-center gap-5 text-center overflow-y-hidden"
       >
         <motion.div
           initial="hidden"
@@ -194,6 +195,7 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+      <Footer />
     </main>
   );
 }
