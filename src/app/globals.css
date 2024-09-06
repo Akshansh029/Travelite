@@ -6,6 +6,11 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --landing-page-bg: #141616;
+}
+
+.landing-page-bg {
+  background: var(--landing-page-bg);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +22,6 @@
 }
 
 body {
-
   height: 100vh;
   width: 100%;
 }

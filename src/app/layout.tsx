@@ -21,7 +21,6 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`
-        ${inter.className} 
         ${poppins.className}
       `}
       >
@@ -31,3 +30,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+//         ${inter.className}
