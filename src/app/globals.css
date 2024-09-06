@@ -2,36 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --landing-page-bg: #141616;
-}
-
-.landing-page-bg {
-  background: var(--landing-page-bg);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  height: 100vh;
-  width: 100%;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -53,13 +23,14 @@ body {
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
+    --radius: 0.5rem;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
   }
+
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -95,4 +66,26 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Scrollbar container */
+::-webkit-scrollbar {
+  width: 10px; /* Adjust the width for a smaller look */
+}
+
+/* Track or background */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light background for the track */
+  border-radius: 10px; /* Optional: round the scrollbar track */
+}
+
+/* Handle or thumb */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Subtle grey for the handle */
+  border-radius: 10px; /* Rounded handle for a modern look */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker grey when hovered */
 }
