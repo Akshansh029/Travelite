@@ -17,12 +17,10 @@ export function HeroHighlightText() {
         duration: 0.5,
         ease: [0.4, 0.0, 0.2, 1],
       }}
-      className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-200 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
+      className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-300 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
     >
       Your Dream Trip,{" "}
-      <Highlight className="text-[#2b5fe4] dark:text-white">
-        AI-Approved
-      </Highlight>
+      <Highlight className="text-white dark:text-white">AI-Approved</Highlight>
     </motion.h1>
   );
 }

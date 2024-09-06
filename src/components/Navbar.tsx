@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="landing-page-bg text-white p-4 border-b-2 border-slate-400">
+    <nav className="sticky top-0 landing-bg text-white p-4 border-b-2 border-slate-400 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="flex gap-2">
           <Logo />
@@ -12,7 +12,10 @@ export default function Navbar() {
         </Link>
 
         <div className="flex space-x-4">
-          <Button variant="ghost" className="text-white hover:bg-[#232727]">
+          <Button
+            variant="ghost"
+            className="text-white hover:bg-[#232727] hover:text-white"
+          >
             Suggested trips
           </Button>
 
