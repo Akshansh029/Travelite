@@ -1,3 +1,4 @@
+import { SignInButton, SignedOut, UserButton } from "@clerk/nextjs";
 import Logo from "./Logo";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -19,9 +20,17 @@ export default function Navbar() {
             Suggested trips
           </Button>
 
-          <Button className="bg-black text-white rounded-full px-6 py-2">
+          {/* <Button className="bg-black text-white rounded-full px-6 py-2">
             Sign in
-          </Button>
+          </Button> */}
+          <SignedOut>
+            <Button className="bg-black text-white rounded-full px-6 py-2">
+              <SignInButton />
+            </Button>
+          </SignedOut>
+          <SignInButton>
+            <UserButton />
+          </SignInButton>
         </div>
       </div>
     </nav>
