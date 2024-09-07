@@ -67,6 +67,10 @@
   background: var(--landing-page-bg);
 }
 
+.landing-white-text {
+  color: var(--landing-page-bg);
+}
+
 .dark-heading-text {
   color: var(--landing-dark-text);
 }

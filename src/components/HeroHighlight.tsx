@@ -20,7 +20,9 @@ export function HeroHighlightText() {
       className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold dark-heading-text dark:text-black max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
     >
       Your Dream Trip,{" "}
-      <Highlight className="text-white dark:text-white">AI-Approved</Highlight>
+      <Highlight className="text-[#f5f7f8] dark:text-white py-1 px-4">
+        AI-Approved
+      </Highlight>
     </motion.h1>
   );
 }

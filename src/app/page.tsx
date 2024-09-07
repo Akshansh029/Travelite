@@ -8,11 +8,13 @@ import { Card } from "@/components/ui/card";
 import { useRef } from "react";
 import { LayoutGridDemo } from "@/components/LayoutGrid";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-import { PinContainer } from "../components/ui/3d-pin";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const ref1 = useRef(null);
   const ref2 = useRef(null);
+
+  const router = useRouter();
 
   const isInView1 = useInView(ref1, { once: true, amount: 0.3 });
   const isInView2 = useInView(ref2, { once: true, amount: 0.3 });
@@ -74,10 +76,11 @@ export default function Home() {
           >
             <Button
               variant={"ghost"}
+              onClick={() => router.push("/create-trip")}
               className="flex gap-3 py-7 px-7 bg-indigo-600 mt-4 hover:bg-[#2653c4] rounded-full"
             >
-              <MapPinned className="text-neutral-300" />
-              <p className="text-neutral-300 text-sm md:text-lg font-medium">
+              <MapPinned className="landing-white-text" />
+              <p className="text-neutral-300 text-sm md:text-lg font-medium landing-white-text">
                 Plan a new trip
               </p>
             </Button>
