@@ -86,6 +86,7 @@ const CreateTrip = () => {
     setLoading(false);
     console.log("Trip Data:", TripData);
     //navigate(`/view-trip/${docId}`)
+    router.push(`/view-trip/${docId}`);
   };
 
   // setting form values in handle submit and calling genrate trip function
