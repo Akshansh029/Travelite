@@ -5,9 +5,13 @@ import Navbar from "@/components/Navbar";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@/components/Footer";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Travelite",
@@ -27,6 +31,7 @@ export default function RootLayout({
         ${poppins.className}
         `}
         >
+          <Toaster richColors position="top-center" />
           <Navbar />
           {children}
           <Footer />
