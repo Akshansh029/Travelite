@@ -8,19 +8,10 @@ const {
 const config = {
   darkMode: ["class"],
   content: [
-<<<<<<< HEAD
     "./pages/**/*.{ts,tsx,js,jsx}",
     "./components/**/*.{ts,tsx,js,jsx}",
     "./app/**/*.{ts,tsx,js,jsx}",
     "./src/**/*.{ts,tsx,js,jsx}",
-=======
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-
-    "./src/app/**/*.{ts,tsx,jsx}",
-    "./src/components/**/*.{ts,tsx,jsx}",
->>>>>>> abb92624ca9e67b03a00577d6ad0a3d000d6c653
   ],
   prefix: "",
   theme: {
