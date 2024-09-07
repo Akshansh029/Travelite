@@ -29,7 +29,10 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --landing-page-bg: #181a1b;
+    /* --landing-page-bg: #ffffff; */
+    --landing-page-bg: #f5f7f8;
+    --landing-dark-text: #1b1a1a;
+    --landing-subheading-text: #6b7280;
   }
 
   .dark {
@@ -62,6 +65,14 @@
 
 .landing-bg {
   background: var(--landing-page-bg);
+}
+
+.dark-heading-text {
+  color: var(--landing-dark-text);
+}
+
+.dark-subheading-text {
+  color: var(--landing-subheading-text);
 }
 
 @layer base {
