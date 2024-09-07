@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { useRef } from "react";
 import { LayoutGridDemo } from "@/components/LayoutGrid";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import { PinContainer } from "../components/ui/3d-pin";
 
 export default function Home() {
   const ref1 = useRef(null);
@@ -73,7 +74,7 @@ export default function Home() {
           >
             <Button
               variant={"ghost"}
-              className="flex gap-3 py-7 px-7 bg-[#0B2F9F] mt-4 hover:bg-[#2653c4] rounded-full"
+              className="flex gap-3 py-7 px-7 bg-indigo-600 mt-4 hover:bg-[#2653c4] rounded-full"
             >
               <MapPinned className="text-neutral-300" />
               <p className="text-neutral-300 text-sm md:text-lg font-medium">
@@ -187,7 +188,9 @@ export default function Home() {
             className="text-center dark-subheading-text mb-8 max-w-2xl mx-auto"
           >
             Embark on a journey through{" "}
-            <span className="text-indigo-500">inspiring itineraries</span>{" "}
+            <span className="text-indigo-500 font-semibold">
+              inspiring itineraries
+            </span>{" "}
             shared by travelers from all over India. See the country through
             their eyes and find the perfect adventure for you.
           </motion.p>
