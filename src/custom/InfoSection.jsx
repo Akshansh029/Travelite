@@ -1,12 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { Button } from '@/components/ui/button'
-import React from 'react'
-import { useEffect, useState } from 'react'
+import { Button } from "@/components/ui/button";
+import React from "react";
+import { useEffect, useState } from "react";
+import { Share2 } from "lucide-react";
 
 const InfoSection = ({ trip }) => {
-    const [imageUrl, setImageUrl] = useState("/plane1.png"); // Default image
+  const [imageUrl, setImageUrl] = useState("/plane1.png"); // Default image
 
   // Function to extract the place name (e.g., "Konark Sun Temple")
   const extractPlaceName = (destination) => {
@@ -37,33 +38,41 @@ const InfoSection = ({ trip }) => {
       fetchImage(placeName); // Fetch image using the place name
     }
   }, [trip?.userSelection?.destination]);
-    return (
-        <div>
+  return (
+    <div>
+      <img
+        src={imageUrl}
+        alt="placeholder"
+        className="h-[330px] w-full object-cover rounded-xl"
+      />
 
-            
-            <img src={imageUrl} alt="placeholder" className='h-[330px] w-full object-cover rounded-xl' />
+      <div className="flex justify-between items-center">
+        {/* showing hotel info */}
+        <div className="my-5 flex flex-col gap-2">
+          <h2 className="font-bold text-3xl">
+            {trip?.userSelection?.destination}🗺️
+          </h2>
 
-            <div className='flex justify-between items-center'>
-                {/* showing hotel info */}
-                <div className='my-5 flex flex-col gap-2'>
-                    <h2 className='font-bold text-3xl'>{trip?.userSelection?.destination}🗺️</h2>
-
-                    {/* div to show basic info */}
-
-                    <div className='flex gap-4 mt-2'>
-                         {/* instead of this can use badge */}
-                        <h2 className='p-1 px-3 bg-gray-200 rounded-full 
-                        text-gray-900 text-xs md:text-md'>{trip?.userSelection?.days} Day 📅</h2>
-                        <h2 className='p-1 px-3 bg-gray-200 rounded-full text-gray-900 text-xs md:text-md'>{trip?.userSelection?.budget} Budget 🪙</h2>
-                        <h2 className='p-1 px-3 bg-gray-200 rounded-full text-xs md:text-md text-gray-900'
-                        >{trip?.userSelection?.people} 🧑‍🤝‍🧑</h2>
-                    </div>
-                </div>
-
-                <Button>➤</Button>
-            </div>
+          <div className="flex md:flex-row flex-col gap-4 mt-2">
+            <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-900 text-sm font-medium md:text-md w-fit">
+              {trip?.userSelection?.days} Day 📅
+            </h2>
+            <h2 className="p-1 px-3 bg-gray-200 rounded-full font-medium text-gray-900 text-sm md:text-md w-fit">
+              {trip?.userSelection?.budget} Budget 🪙
+            </h2>
+            <h2 className="p-1 px-3 bg-gray-200 rounded-full text-sm font-medium md:text-md text-gray-900 w-fit">
+              {trip?.userSelection?.people} 🧑‍🤝‍🧑
+            </h2>
+          </div>
         </div>
-    )
-}
 
-export default InfoSection
+        <Button className="flex gap-2" variant={"default"}>
+          <p className="text-sm text-white">Share</p>
+          <Share2 className="" size={18} />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default InfoSection;
