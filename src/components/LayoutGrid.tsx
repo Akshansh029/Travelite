@@ -24,7 +24,7 @@ const SkeletonOne = () => {
       </p>
       <Button
         variant={"destructive"}
-        className="bg-purple-600 hover:bg-indigo-600"
+        className="bg-indigo-600 hover:bg-purple-600"
       >
         View trip
       </Button>
@@ -45,7 +45,7 @@ const SkeletonTwo = () => {
       </p>
       <Button
         variant={"destructive"}
-        className="bg-purple-600 hover:bg-indigo-600"
+        className="bg-indigo-600 hover:bg-purple-600"
       >
         View trip
       </Button>
@@ -65,7 +65,7 @@ const SkeletonThree = () => {
       </p>
       <Button
         variant={"destructive"}
-        className="bg-purple-600 hover:bg-indigo-600"
+        className="bg-indigo-600 hover:bg-purple-600"
       >
         View trip
       </Button>
@@ -85,7 +85,7 @@ const SkeletonFour = () => {
       </p>
       <Button
         variant={"destructive"}
-        className="bg-purple-600 hover:bg-indigo-600"
+        className="bg-indigo-600 hover:bg-purple-600"
       >
         View trip
       </Button>

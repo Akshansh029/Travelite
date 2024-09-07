@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google"; // Import Poppins
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import Footer from "@/components/Footer";
 
-// Importing both Inter and Poppins fonts
 const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] }); // You can customize the font weights
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: "Travelite",
@@ -29,6 +29,7 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
