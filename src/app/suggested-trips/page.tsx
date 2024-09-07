@@ -128,13 +128,14 @@ export default function DarkTripFinder() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#181a1b] text-gray-200 px-24 ">
+    <div className="min-h-screen landing-bg text-gray-200 px-24 ">
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-4 text-white">
+        <h1 className="text-4xl font-bold text-center mb-4 dark-heading-text">
           Trip finder
         </h1>
-        <p className="text-center text-gray-400 mb-8">
-          Find trips created by other users and get inspired for your next trip!
+        <p className="text-center dark-subheading-text mb-8 text-lg">
+          Find trips created by other users and get inspired for{" "}
+          <span className="text-indigo-600 font-semibold">your next trip!</span>
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {trips.map((trip) => (
@@ -151,17 +152,17 @@ export default function DarkTripFinder() {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-4">
-                  <h2 className="font-semibold text-lg mb-2 text-white">
+                  <h2 className="font-semibold text-lg mb-2 dark-heading-text">
                     {trip.title}
                   </h2>
-                  <p className="text-sm text-gray-400 mb-4">
+                  <p className="text-sm dark-subheading-text mb-4">
                     {trip.description}
                   </p>
                 </div>
               </CardContent>
               <CardFooter className="flex justify-start py-2 border-t border-gray-700 space-x-2">
-                <MapPin className="text-gray-400" size={18} />
-                <span className="text-gray-400 text-sm">
+                <MapPin className="dark-subheading-text" size={18} />
+                <span className="dark-subheading-text text-sm">
                   {trip.destination}
                 </span>
               </CardFooter>
