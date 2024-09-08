@@ -88,10 +88,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/create-trip"
+                  href="/past-trips"
                   className="text-sm dark-subheading-text hover:text-[#171717]"
                 >
-                  Find Destinations
+                  Your past trips
                 </Link>
               </li>
             </ul>

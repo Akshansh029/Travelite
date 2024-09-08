@@ -1,9 +1,7 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Heart, Map, MapPin, Navigation } from "lucide-react";
-import Image from "next/image";
+import { Card } from "@/components/ui/card";
+import { Navigation } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function DarkTripFinder() {
   const trips = [
@@ -55,126 +53,103 @@ export default function DarkTripFinder() {
       image: "/logo.svg",
       destination: "Jaipur",
     },
-    // {
-    //   id: 2,
-    //   title: "Goa Getaway: 7-Day Beach Bliss",
-    //   description:
-    //     "Relax on the stunning beaches of Goa, enjoy vibrant nightlife, and explore beautiful churches over a 7-day trip...",
-    //   image:
-    //     "https://images.pexels.com/photos/27869489/pexels-photo-27869489/free-photo-of-peaceful-sunset-in-goa-02.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    //   destination: "Goa",
-    //   creator: { name: "Priya Sharma", avatar: "P" },
-    // },
-    // {
-    //   id: 3,
-    //   title: "Kerala Backwaters: 6-Day Serenity",
-    //   description:
-    //     "Experience the tranquility of Kerala’s backwaters with houseboat cruises, scenic views, and relaxing getaways...",
-    //   image:
-    //     "https://images.pexels.com/photos/13691356/pexels-photo-13691356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    //   destination: "Kerala",
-    //   creator: { name: "Anil Nair", avatar: "A" },
-    // },
-    // {
-    //   id: 4,
-    //   title: "Shimla Retreat: 4-Day Mountain Escape",
-    //   description:
-    //     "Unwind in the peaceful mountain town of Shimla with its colonial charm and scenic views...",
-    //   image:
-    //     "https://images.pexels.com/photos/2961109/pexels-photo-2961109.jpeg",
-    //   destination: "Shimla",
-    //   creator: { name: "Kavita Chauhan", avatar: "K" },
-    // },
-    // {
-    //   id: 5,
-    //   title: "Majestic Udaipur: 5-Day Lake City Delight",
-    //   description:
-    //     "Discover the beauty of Udaipur’s lakes, palaces, and historic temples over an immersive 5-day journey...",
-    //   image:
-    //     "https://images.pexels.com/photos/27960112/pexels-photo-27960112/free-photo-of-cityscape-lake-city-udaipur.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    //   destination: "Udaipur",
-    //   creator: { name: "Vikram Rathore", avatar: "V" },
-    // },
-    // {
-    //   id: 6,
-    //   title: "Rishikesh Adventure: 3-Day Spiritual and Thrill Trip",
-    //   description:
-    //     "Combine adventure with spirituality in Rishikesh, where you’ll experience river rafting and visit sacred temples...",
-    //   image:
-    //     "https://plus.unsplash.com/premium_photo-1697730421390-63ae0487b986?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   destination: "Rishikesh",
-    //   creator: { name: "Deepak Rawat", avatar: "D" },
-    // },
-    // {
-    //   id: 7,
-    //   title: "Golden Temple Experience: 2-Day Amritsar Journey",
-    //   description:
-    //     "Witness the grandeur of the Golden Temple and explore the cultural heritage of Amritsar in this short, 2-day trip...",
-    //   image:
-    //     "https://plus.unsplash.com/premium_photo-1697730396642-7a338ffc2852?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   destination: "Amritsar",
-    //   creator: { name: "Harpreet Singh", avatar: "H" },
-    // },
-    // {
-    //   id: 8,
-    //   title: "Leh-Ladakh Expedition: 10-Day High-Altitude Adventure",
-    //   description:
-    //     "Embark on a thrilling 10-day road trip to the high-altitude desert of Leh-Ladakh, surrounded by breathtaking landscapes...",
-    //   image:
-    //     "https://images.unsplash.com/photo-1635255506105-b74adbd94026?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    //   destination: "Leh-Ladakh",
-    //   creator: { name: "Aryan Bhatt", avatar: "A" },
-    // },
   ];
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.5,
+      },
+    },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 100 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        delay: 0.2,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen landing-bg text-gray-200 sm:px-10 md:px-32 lg:px-44 xl:px-56 px-5 py-10">
+    <div
+      className="min-h-screen landing-bg text-gray-200 sm:px-10 md:px-32 lg:px-44 xl:px-56 px-5 py-3"
+      // initial="hidden"
+      // animate="visible"
+      // variants={containerVariants}
+    >
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-4 dark-heading-text">
+        <h1
+          className="text-4xl font-bold text-center mb-4 dark-heading-text"
+          // variants={cardVariants}
+        >
           Trip finder
         </h1>
-        <p className="text-center dark-subheading-text mb-8 text-lg">
+        <p
+          className="text-center dark-subheading-text mb-8 text-lg"
+          // variants={cardVariants}
+        >
           Find trips created by other users and get inspired for{" "}
           <span className="text-indigo-600 font-semibold">your next trip!</span>
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          // variants={containerVariants}
+        >
           {trips.map((trip) => (
-            <Card
-              className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-xl p-4 flex flex-col gap-5 cursor-pointer w-full h-fit justify-center"
+            <div
               key={trip.id}
+              // variants={cardVariants}
+              // whileHover={{ scale: 1.05 }}
             >
-              <img
-                src="/hotel.png"
-                className="aspect-square object-cover rounded-lg max-h-[200px]"
-                alt="Place Image"
-              />
-              <div className="flex-grow mt-2">
-                <h2 className="font-bold text-xl dark-heading-text">Jaipur</h2>
-                <p className="text-sm dark-heading-text truncate ...">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-                  sapiente suscipit, atque a similique cupiditate reiciendis
-                  quia nemo possimus est! Dicta molestias fuga cumque, ipsa
-                  deserunt quo et dolorum quisquam.
-                </p>
-                <p className="mt-2 text-sm font-semibold dark-heading-text">
-                  ⭐ 4.4 Rating
-                </p>
-                <a
-                  href={`https://www.google.com/maps/search/?api=1&query=jaipur`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    className="mt-3 border-gray-400 border-[1px] rounded-lg gap-2"
-                    variant={"default"}
-                    size="sm"
+              <Card className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-xl p-4 flex flex-col gap-5 cursor-pointer w-full h-fit justify-center">
+                <img
+                  src="/hotel.png"
+                  className="aspect-square object-cover rounded-lg max-h-[200px]"
+                  alt="Place Image"
+                />
+                <div className="flex-grow mt-2">
+                  <h2 className="font-bold text-xl dark-heading-text">
+                    Jaipur
+                  </h2>
+                  <p className="text-sm dark-heading-text truncate ...">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quam sapiente suscipit, atque a similique cupiditate
+                    reiciendis quia nemo possimus est! Dicta molestias fuga
+                    cumque, ipsa deserunt quo et dolorum quisquam.
+                  </p>
+                  <p className="mt-2 text-sm font-semibold dark-heading-text">
+                    ⭐ 4.4 Rating
+                  </p>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=jaipur`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <p className="">Navigate</p>
-                    <Navigation className="white" size={16} />
-                  </Button>
-                </a>
-              </div>
-            </Card>
+                    <Button
+                      className="mt-3 border-gray-400 border-[1px] rounded-lg gap-2"
+                      variant={"default"}
+                      size="sm"
+                    >
+                      <p className="">Navigate</p>
+                      <Navigation className="white" size={16} />
+                    </Button>
+                  </a>
+                </div>
+              </Card>
+            </div>
           ))}
         </div>
       </div>
