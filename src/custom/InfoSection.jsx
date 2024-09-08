@@ -41,31 +41,29 @@ const InfoSection = ({ trip }) => {
     }
   }, [trip?.userSelection?.destination]);
   return (
-    <div>
-      
+    <div className="">
       <img
         src={imageUrl}
         alt="placeholder"
-        className="h-[330px] w-full object-cover rounded-4xl"
+        className="h-[330px] w-full object-cover"
       />
-     
 
-      <div className="flex justify-between items-center">
-        {/* showing hotel info */}
+      <div className="flex justify-between items-center px-6">
         <div className="my-5 flex flex-col gap-2">
           <h2 className="font-bold text-3xl">
             {trip?.userSelection?.destination}🗺️
           </h2>
 
           <div className="flex md:flex-row flex-col gap-4 mt-2">
-            <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-900 text-sm font-medium md:text-md w-fit">
+            <h2 className="p-1 px-3 bg-gray-200 rounded-full text-gray-900 text-sm font-semibold md:text-md w-fit">
               {trip?.userSelection?.days} Day 📅
             </h2>
-            <h2 className="p-1 px-3 bg-gray-200 rounded-full font-medium text-gray-900 text-sm md:text-md w-fit">
+            <h2 className="p-1 px-3 bg-gray-200 rounded-full font-semibold text-gray-900 text-sm md:text-md w-fit">
               {trip?.userSelection?.budget} Budget 🪙
             </h2>
-            <h2 className="p-1 px-3 bg-gray-200 rounded-full text-sm font-medium md:text-md text-gray-900 w-fit">
-              {trip?.userSelection?.people} 🧑‍🤝‍🧑
+            <h2 className="p-1 px-3 bg-gray-200 rounded-full text-sm font-semibold md:text-md text-gray-900 w-fit">
+              {trip?.userSelection?.people}
+              {trip?.userSelection?.people === 1 ? "🧍" : "🧑‍🤝‍🧑"}
             </h2>
           </div>
         </div>
