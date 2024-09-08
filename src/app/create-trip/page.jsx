@@ -16,7 +16,6 @@ import { useUser } from "@clerk/nextjs";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "@/service/firebaseConfig";
 import { useRouter } from "next/navigation";
-import { Cover } from "@/components/ui/cover";
 import { motion } from "framer-motion";
 import { LampContainer } from "@/components/ui/lamp";
 
@@ -33,17 +32,10 @@ const CreateTrip = () => {
 
   const { isLoaded, user } = useUser(); // Access user information
 
-  // for navigation
   const router = useRouter();
 
   // loading state for management
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   if (isLoaded && user) {
-  //     console.log('User Email:', user.primaryEmailAddress.emailAddress); // Log user info when it's available
-  //   }
-  // }, [isLoaded, user]);
 
   const [formData, setFormData] = useState({
     destination: "",
@@ -161,6 +153,19 @@ const CreateTrip = () => {
     setIsDropdownOpen(false); // Close the dropdown after selection
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 120,
+        delay: 0.2,
+      },
+    },
+  };
+
   // useEffect(() => {
   //   if (selectedDestination) {
   //     console.log("Selected Destination:", selectedDestination);
@@ -168,8 +173,15 @@ const CreateTrip = () => {
   // }, [selectedDestination]);
 
   return (
-    <div className="w-full sm:px-10 md:px-32 lg:px-56 xl:px-72 flex flex-col items-center gap-6 py-12">
-      <div className="flex flex-col gap-2 items-center text-center w-full">
+    <motion.div
+      className="w-full sm:px-10 md:px-32 lg:px-56 xl:px-72 flex flex-col items-center gap-6 py-12"
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div
+        className="flex flex-col gap-2 items-center text-center w-full"
+        variants={containerVariants}
+      >
         <h2 className="font-bold text-3xl">
           Tell us your travel{" "}
           <span className="bg-indigo-400 text-white px-4 py-2 rounded-lg shadow-lg">
@@ -181,11 +193,11 @@ const CreateTrip = () => {
           Provide us with basic information, and our trip planner will generate
           a customized itinerary based on your preferences.
         </p>
-      </div>
+      </motion.div>
 
-      <div className="w-[90%]">
+      <motion.div className="w-[90%]" variants={containerVariants}>
         {/* Form */}
-        <div className="">
+        <motion.div className="" variants={containerVariants}>
           <div className="flex flex-col gap-2">
             <h2 className="text-xl my-3 font-medium">
               What is your destination of choice?
@@ -203,23 +215,27 @@ const CreateTrip = () => {
               }}
             />
           </div>
-          {/* Dropdown for predictions */}
+
           {isDropdownOpen && predictions.length > 0 && (
             <ul className="border border-gray-300 mt-2 rounded-md shadow-lg max-h-60 overflow-auto">
               {predictions.map((prediction, index) => (
                 <li
                   key={index}
                   className="p-2 cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSelectPrediction(prediction.description)} // Handle click
+                  onClick={() => handleSelectPrediction(prediction.description)}
                 >
                   {prediction.description}
                 </li>
               ))}
             </ul>
           )}
-        </div>
+        </motion.div>
+
         {/* Number of days input */}
-        <div className="flex flex-col gap-2">
+        <motion.div
+          className="flex flex-col gap-2"
+          variants={containerVariants}
+        >
           <h2 className="text-xl my-3 font-md mt-8 font-medium">
             How many days are you planning for your trip?
           </h2>
@@ -232,41 +248,47 @@ const CreateTrip = () => {
             value={inputDays}
             onChange={(e) => setInputDays(e.target.value)}
           />
-        </div>
+        </motion.div>
+
         {/* Budget input */}
-        <div>
+        <motion.div variants={containerVariants}>
           <h2 className="text-xl my-3 font-md mt-8 font-semibold">
             Choose your budget
           </h2>
           <div className="grid grid-cols-3 gap-5 mt-5 cursor-pointer">
             {SelectBudgetOptions.map((option) => (
-              <div
+              <motion.div
                 key={option.id}
                 className={`p-4 border rounded-lg hover:shadow-2xl ${
                   inputBudget == option.title && "shadow-lg border-[2px] "
                 }`}
                 onClick={() => setInputBudget(option.title)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <h2 className="text-3xl">{option.icon}</h2>
                 <h2 className="font-bold text-lg">{option.title}</h2>
                 <h2 className="text-sm text-gray-800">{option.desc}</h2>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
+
         {/* Number of people input */}
-        <div>
+        <motion.div variants={containerVariants}>
           <h2 className="text-xl my-3 font-md mt-8 font-semibold">
             How many people are traveling?
           </h2>
           <div className="grid grid-cols-3 gap-5 mt-5 cursor-pointer mb-5">
             {SelectTravelList.map((option) => (
-              <div
+              <motion.div
                 key={option.id}
                 className={`p-4 border rounded-lg hover:shadow-2xl ${
                   inputPeople == option.people && "shadow-lg border-[2px]"
                 }`}
                 onClick={() => setInputPeople(option.people)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <h2 className="text-3xl">{option.icon}</h2>
                 <h2 className="font-bold text-lg">{option.title}</h2>
@@ -274,11 +296,16 @@ const CreateTrip = () => {
                 <h2 className="text-sm text-gray-600 font-thin font-serif mt-2 flex justify-start">
                   ({option.people})
                 </h2>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
-        <div className="mt-10 justify-end flex">
+        </motion.div>
+
+        {/* Submit button */}
+        <motion.div
+          className="mt-10 justify-end flex"
+          variants={containerVariants}
+        >
           {loading ? (
             <Button disabled={true} className="w-full py-4 text-base">
               Generating trip...
@@ -292,9 +319,9 @@ const CreateTrip = () => {
               Generate trip ✈️
             </Button>
           )}
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

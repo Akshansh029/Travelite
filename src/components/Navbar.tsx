@@ -4,10 +4,13 @@ import Logo from "./Logo";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { DotIcon, PlaneLanding, PlaneTakeoff } from "lucide-react";
+import { PlaneLanding, PlaneTakeoff } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 export default function Navbar() {
   const router = useRouter();
+  const user = useUser();
+  console.log(user);
 
   return (
     <nav className="sticky top-0 landing-bg text-black p-4 border-b-2 border-slate-300 z-[99] ">
@@ -26,13 +29,15 @@ export default function Navbar() {
             Suggested trips
           </Button>
 
-          <Button
-            className="hidden md:block text-white bg-black hover:bg-[#232727] hover:text-white mr-3"
-            variant="ghost"
-            onClick={() => router.push("/past-trips")}
-          >
-            My Trips
-          </Button>
+          {user.user && (
+            <Button
+              className="hidden md:block text-white bg-black hover:bg-[#232727] hover:text-white mr-3"
+              variant="ghost"
+              onClick={() => router.push("/past-trips")}
+            >
+              My Trips
+            </Button>
+          )}
 
           <SignedOut>
             <Button className="bg-black text-white rounded-full px-6 py-2">

@@ -8,6 +8,7 @@ import { useEffect, useState, useCallback } from "react";
 import { SkeletonCard } from "@/custom/SkeletonCard";
 import { toast } from "sonner";
 import UserTripItemCard from "@/custom/UserTripItemCard";
+import { motion } from "framer-motion";
 
 const PastTrips = () => {
   const [loading, setLoading] = useState(true); // Loading state management
@@ -58,9 +59,41 @@ const PastTrips = () => {
     }
   }, [userEmail, getUserTrips]);
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.5,
+      },
+    },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
   return (
-    <div className="landing-bg sm:px-10 md:px-32 lg:px-44 xl:px-56 px-5 py-10">
-      <div className="flex flex-col gap-2 text-center">
+    <motion.div
+      className="landing-bg sm:px-10 md:px-32 lg:px-44 xl:px-56 px-5 py-10 grid place-items-center"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div
+        className="flex flex-col gap-2 text-center"
+        variants={cardVariants}
+      >
         <h2 className="font-bold text-3xl">My Trips</h2>
         <p className="font-normal">
           Find all your previous adventures in{" "}
@@ -68,7 +101,7 @@ const PastTrips = () => {
           Explore destinations, dates, and highlights from your completed trips
           to relive memories and plan your next journey.
         </p>
-      </div>
+      </motion.div>
 
       {loading && (
         <div className="flex gap-5 mt-8">
@@ -79,15 +112,22 @@ const PastTrips = () => {
       )}
 
       {!loading && userTrips.length === 0 && (
-        <p className="mt-5 text-gray-500">You have no past trips.</p>
+        <motion.p className="mt-5 text-gray-500" variants={cardVariants}>
+          You have no past trips.
+        </motion.p>
       )}
 
-      <div className="grid grids-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10 ">
+      <motion.div
+        className="grid grids-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10"
+        variants={containerVariants}
+      >
         {userTrips.map((trip) => (
-          <UserTripItemCard key={trip.id} trip={trip} />
+          <motion.div key={trip.id} variants={cardVariants}>
+            <UserTripItemCard trip={trip} />
+          </motion.div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
