@@ -4,22 +4,29 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic"; // Import dynamic for client-side rendering
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
-import { Marker, Popup } from 'react-leaflet'; // Import Marker and Popup
-import L from 'leaflet';
+import { Marker, Popup } from "react-leaflet"; // Import Marker and Popup
+import L from "leaflet";
 
 // Dynamically import MapContainer and TileLayer to disable SSR
-const MapContainer = dynamic(() => import("react-leaflet").then(mod => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import("react-leaflet").then(mod => mod.TileLayer), { ssr: false });
+const MapContainer = dynamic(
+  () => import("react-leaflet").then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import("react-leaflet").then((mod) => mod.TileLayer),
+  { ssr: false }
+);
 
 // Marker icon
-const createIcon = () => L.icon({
-  iconUrl: '/marker-icon.png', // Add marker icon path
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  //shadowUrl: '/marker-shadow.png', // Add marker shadow path
-  shadowSize: [41, 41]
-});
+const createIcon = () =>
+  L.icon({
+    iconUrl: "/marker-icon.png", // Add marker icon path
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    //shadowUrl: '/marker-shadow.png', // Add marker shadow path
+    shadowSize: [41, 41],
+  });
 
 const Hotels = ({ trip }) => {
   const [imageUrls, setImageUrls] = useState({}); // Store image URLs for each hotel
@@ -55,8 +62,10 @@ const Hotels = ({ trip }) => {
       setHotels(trip.tripData.hotels);
 
       // Calculate average coordinates for map center
-      const coordinates = trip.tripData.hotels.map(hotel => {
-        const [lat, lng] = hotel.geoCoordinates.split(',').map(coord => parseFloat(coord));
+      const coordinates = trip.tripData.hotels.map((hotel) => {
+        const [lat, lng] = hotel.geoCoordinates
+          .split(",")
+          .map((coord) => parseFloat(coord));
         return [lat, lng];
       });
 
@@ -64,8 +73,11 @@ const Hotels = ({ trip }) => {
       console.log("Parsed Coordinates:", coordinates);
 
       if (coordinates.length > 0) {
-        const avgLat = coordinates.reduce((sum, [lat]) => sum + lat, 0) / coordinates.length;
-        const avgLng = coordinates.reduce((sum, [, lng]) => sum + lng, 0) / coordinates.length;
+        const avgLat =
+          coordinates.reduce((sum, [lat]) => sum + lat, 0) / coordinates.length;
+        const avgLng =
+          coordinates.reduce((sum, [, lng]) => sum + lng, 0) /
+          coordinates.length;
 
         // Debugging: Check average coordinates
         console.log("Average Coordinates:", { avgLat, avgLng });
@@ -84,27 +96,35 @@ const Hotels = ({ trip }) => {
     }
   }, [trip]);
 
+  // {mapLoaded && mapCenter && (
+  //   <div
+  //     className="relative w-full h-[400px] rounded-xl overflow-hidden mb-5"
+  //     style={{ zIndex: "1" }}
+  //   >
+  //     {/* Ensure map container is only initialized once */}
+  //     <MapContainer
+  //       center={mapCenter}
+  //       zoom={13}
+  //       style={{ height: "100%", width: "100%" }}
+  //     >
+  //       <TileLayer
+  //         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  //         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  //       />
+  //       {/* Render a single marker at the average coordinates */}
+  //       {/* {averageCoords && (
+  //         <Marker position={averageCoords} icon={createIcon()}>
+  //           <Popup>
+  //             <strong>Average Location</strong><br />
+  //             This is the average location of the hotels.<br />
+  //           </Popup>
+  //         </Marker>
+  //       )} */}
+  //     </MapContainer>
+  //   </div>
+  // )}
   return (
-    <div>
-      {/* Conditionally render the map only when mapCenter is set */}
-      {mapLoaded && mapCenter && (
-        <div className="relative w-full h-[400px] rounded-xl overflow-hidden mb-5" style={{ zIndex: "1" }}>
-          {/* Ensure map container is only initialized once */}
-          <MapContainer center={mapCenter} zoom={13} style={{ height: "100%", width: "100%" }}>
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
-            {/* Render a single marker at the average coordinates */}
-            {/* {averageCoords && (
-              <Marker position={averageCoords} icon={createIcon()}>
-                <Popup>
-                  <strong>Average Location</strong><br />
-                  This is the average location of the hotels.<br />
-                </Popup>
-              </Marker>
-            )} */}
-          </MapContainer>
-        </div>
-      )}
-
+    <div className="px-6">
       <h2 className="font-bold text-xl mt-5 mb-3">Hotel Recommendations</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
