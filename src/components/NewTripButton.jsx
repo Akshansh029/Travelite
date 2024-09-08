@@ -1,8 +1,11 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { MapPinned } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const NewTripButton = () => {
+
+  const router=useRouter()
   return (
     <Button
       variant={"ghost"}
