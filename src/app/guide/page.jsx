@@ -11,41 +11,41 @@ const Page = () => {
   const CARDS = [
     {
       id: 0,
-      // name: "Manu Arora",
       image: "/wheel.jpg",
-      // designation: "Senior Software Engineer",
+      audio:"/wheel.mp3",
       content: (
         <p>
-          These cards are amazing, <Highlight>I want to use them</Highlight> in
-          my project. Framer motion is a godsend ngl tbh fam 🙏
+           The iconic chariot wheels are located on the sides of the temple’s main platform. The temple is designed as a <Highlight>colossal chariot of the Sun God </Highlight>, and the 24 wheels are spread out evenly on either side of the temple.
         </p>
       ),
     },
     {
       id: 1,
-      // name: "Elon Musk",
       image: "/konark3.jpg",
-      // designation: "Senior Shitposter",
+      audio:"/magnet.mp3",
       content: (
         <p>
-          I don't like this Twitter thing,{" "}
-          <Highlight>deleting it right away</Highlight> because yolo. Instead, I
-          would like to call it <Highlight>X.com</Highlight> so that it can
-          easily be confused with adult sites.
+          The temple originally had a <Highlight> massive magnet </Highlight> at its topmost section, possibly above the central sanctum or the Vimana (tower), which is no longer standing.
         </p>
       ),
     },
     {
       id: 2,
-      // name: "Tyler Durden",
       image: "/konark2.jpg",
-      // designation: "Manager Project Mayhem",
+      audio:"/sun_feet.mp3",
       content: (
         <p>
-          The first rule of <Highlight>Fight Club</Highlight> is that you do not
-          talk about fight club. The second rule of{" "}
-          <Highlight>Fight Club</Highlight> is that you DO NOT TALK about fight
-          club.
+          Inside the main sanctum of the temple, there were once three statues of the   <Highlight> Sun God, Surya, positioned to capture the rays of the rising, noon, and setting sun.</Highlight> The feet of these statues, representing Surya’s various poses, are significant. 
+        </p>
+      ),
+    },
+    {
+      id: 3,
+      image: "/konark2.jpg",
+      audio:"/dancing_sculptures.mp3",
+      content: (
+        <p>
+          These are found on the walls of the<Highlight> Natya Mandapa (Dance Hall) </Highlight>and other parts of the temple. The Natya Mandapa was specifically built as a platform for dance performances in honor of the Sun God, and hence the walls are adorned with dancing figures in various classical poses. 
         </p>
       ),
     },
@@ -170,6 +170,7 @@ const Page = () => {
           className="mt-8 bg-gradient-to-br from-slate-200/50 to-slate-900 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
         >
           Explore Facts <br /> the Right Way
+          
         </motion.h1>
       </LampContainer>
       <div className="p-10">{/* <StickyScroll content={content} /> */}</div>
