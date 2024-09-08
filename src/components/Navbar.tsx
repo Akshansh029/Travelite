@@ -31,7 +31,10 @@ export default function Navbar() {
             </Button>
           </SignedOut>
           <SignInButton>
+            <div className="flex items-center">
+            <Button className="text-white bg-black hover:bg-[#232727] hover:text-white mr-3" variant="ghost">My Trips</Button>
             <UserButton />
+            </div>
           </SignInButton>
         </div>
       </div>
