@@ -10,7 +10,6 @@ import { useUser } from "@clerk/nextjs";
 export default function Navbar() {
   const router = useRouter();
   const user = useUser();
-  console.log(user);
 
   return (
     <nav className="sticky top-0 landing-bg text-black p-4 border-b-2 border-slate-300 z-[99] ">
