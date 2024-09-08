@@ -9,7 +9,7 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <nav className="sticky top-0 landing-bg text-black p-4 border-b-2 border-slate-300 z-50 ">
+    <nav className="sticky top-0 landing-bg text-black p-4 border-b-2 border-slate-300 z-[99] ">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="flex gap-2">
           <Logo width={60} height={60} />

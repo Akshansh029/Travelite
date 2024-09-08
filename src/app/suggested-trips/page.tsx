@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Heart, Map, MapPin } from "lucide-react";
+import { Heart, Map, MapPin, Navigation } from "lucide-react";
 import Image from "next/image";
 
 export default function DarkTripFinder() {
@@ -168,6 +168,40 @@ export default function DarkTripFinder() {
               </CardFooter>
             </Card>
           ))}
+          <div className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-xl p-4 flex flex-col gap-5 cursor-pointer w-full h-fit justify-center">
+            <img
+              src="/hotel.png"
+              className="aspect-square object-cover rounded-lg max-h-[200px]"
+              alt="Place Image"
+            />
+            <div className="flex-grow mt-2">
+              <h2 className="font-bold text-xl dark-heading-text">Jaipur</h2>
+              <p className="text-sm dark-heading-text truncate ...">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+                sapiente suscipit, atque a similique cupiditate reiciendis quia
+                nemo possimus est! Dicta molestias fuga cumque, ipsa deserunt
+                quo et dolorum quisquam.
+              </p>
+              <p className="mt-2 text-sm font-semibold dark-heading-text">
+                ⭐ 4.4 Rating
+              </p>
+
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=jaipur`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button
+                  className="mt-3 border-gray-400 border-[1px] rounded-lg gap-2"
+                  variant={"default"}
+                  size="sm"
+                >
+                  <p className="">Navigate</p>
+                  <Navigation className="white" size={16} />
+                </Button>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

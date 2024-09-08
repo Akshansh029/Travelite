@@ -16,6 +16,7 @@ import { useUser } from "@clerk/nextjs";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "@/service/firebaseConfig";
 import { useRouter } from "next/navigation";
+import Timeline from "../../components/HorizontalScroll";
 
 const CreateTrip = () => {
   const [currentInput, setCurrentInput] = useState("");

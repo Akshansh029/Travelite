@@ -44,7 +44,8 @@ export default function Home() {
     <main className="overflow-y-auto landing-bg">
       <BackgroundBeamsWithCollision>
         <motion.section
-          className="hero pt-10 px-5 landing-bg h-[calc(100vh-72px)] flex flex-col items-center justify-center text-center overflow-y-hidden"
+          className="pt-10 px-5 min-h-screen landing-bg flex flex-col items-center justify-center text-center"
+          // style={{ height: "calc(100vh - 72px)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.4, 0.0, 0.2, 1] }}
