@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { DotIcon, PlaneLanding, PlaneTakeoff } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter();
@@ -20,9 +21,17 @@ export default function Navbar() {
           <Button
             onClick={() => router.push("/suggested-trips")}
             variant="ghost"
-            className="text-white bg-black hover:bg-[#232727] hover:text-white"
+            className="hidden md:block text-white bg-black hover:bg-[#232727] hover:text-white"
           >
             Suggested trips
+          </Button>
+
+          <Button
+            className="hidden md:block text-white bg-black hover:bg-[#232727] hover:text-white mr-3"
+            variant="ghost"
+            onClick={() => router.push("/past-trips")}
+          >
+            My Trips
           </Button>
 
           <SignedOut>
@@ -32,16 +41,20 @@ export default function Navbar() {
           </SignedOut>
 
           <SignedIn>
-            <div className="flex items-center">
-              <Button
-                className="text-white bg-black hover:bg-[#232727] hover:text-white mr-3"
-                variant="ghost"
-                onClick={() => router.push('/past-trips')}
-              >
-                My Trips
-              </Button>
-              <UserButton />
-            </div>
+            <UserButton>
+              <UserButton.MenuItems>
+                <UserButton.Link
+                  label="My trips"
+                  labelIcon={<PlaneLanding />}
+                  href="/past-trips"
+                />
+                <UserButton.Link
+                  label="Suggested trip"
+                  labelIcon={<PlaneTakeoff />}
+                  href="/suggested-trips"
+                />
+              </UserButton.MenuItems>
+            </UserButton>
           </SignedIn>
         </div>
       </div>

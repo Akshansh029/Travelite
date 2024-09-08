@@ -2,10 +2,11 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Card } from "../components/ui/card";
 
 const UserTripItemCard = ({ trip }) => {
   const [imageUrl, setImageUrl] = useState("/plane1.png"); // Default image
-  const router=useRouter();
+  const router = useRouter();
 
   // Function to extract the place name (e.g., "Konark Sun Temple")
   const extractPlaceName = (destination) => {
@@ -38,21 +39,70 @@ const UserTripItemCard = ({ trip }) => {
   }, [trip?.userSelection?.destination]);
 
   return (
-    <div className="bg-gray-200 rounded-xl cursor-pointer" 
-    onClick={()=>router.push(`/view-trip/${trip?.id}`)}>
-  
-      {/* Dynamically display the fetched image */}
-      <img src={imageUrl} alt="image" className="object-cover rounded-xl p-3 w-full h-[150px]" />
-      <div>
-        <h2 className="font-semibold px-3 text-lg pb-5">
+    <Card
+      className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-2xl p-4 flex flex-col gap-5 cursor-pointer w-full h-full justify-center text-start"
+      onClick={() => router.push(`/view-trip/${trip?.id}`)}
+    >
+      <img
+        src={imageUrl}
+        className="aspect-square object-cover rounded-xl max-h-[150px] w-full"
+        alt="Place Image"
+      />
+      <div className="flex-grow">
+        <h2 className="font-semibold text-lg">
           {trip?.userSelection?.destination}
         </h2>
-        {/* <h2 className="px-3 mt-1 py-2 text-gray-800 tracking-tight text-sm">
-          {trip?.userSelection?.days} Days with {trip?.userSelection?.budget} Budget
-        </h2> */}
+        <div className="flex gap-2 flex-wrap mt-4">
+          <span className="py-1 px-2 rounded-3xl bg-gray-200 text-xs md:text-sm font-medium">
+            💵 {trip?.userSelection?.budget}
+          </span>
+          <span className="py-1 px-2 rounded-3xl bg-gray-200 text-xs md:text-sm font-medium">
+            📅 {trip?.userSelection?.days}{" "}
+            {trip?.userSelection?.days > 1 ? "days" : "day"}
+          </span>
+          <span className="py-1 px-2 rounded-3xl bg-gray-200 text-xs md:text-sm font-medium">
+            🧑‍🤝‍🧑 {trip?.userSelection?.people}{" "}
+          </span>
+        </div>
       </div>
-    </div>
+    </Card>
   );
 };
+
+// <Card
+//   className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-xl p-4 flex flex-col gap-5 cursor-pointer w-full h-fit justify-center"
+//   key={trip.id}
+// >
+//   <img
+//     src="/hotel.png"
+//     className="aspect-square object-cover rounded-lg max-h-[200px]"
+//     alt="Place Image"
+//   />
+//   <div className="flex-grow mt-2">
+//     <h2 className="font-bold text-xl dark-heading-text">Jaipur</h2>
+//     <p className="text-sm dark-heading-text truncate ...">
+//       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam sapiente
+//       suscipit, atque a similique cupiditate reiciendis quia nemo possimus est!
+//       Dicta molestias fuga cumque, ipsa deserunt quo et dolorum quisquam.
+//     </p>
+//     <p className="mt-2 text-sm font-semibold dark-heading-text">
+//       ⭐ 4.4 Rating
+//     </p>
+//     <a
+//       href={`https://www.google.com/maps/search/?api=1&query=jaipur`}
+//       target="_blank"
+//       rel="noopener noreferrer"
+//     >
+//       <Button
+//         className="mt-3 border-gray-400 border-[1px] rounded-lg gap-2"
+//         variant={"default"}
+//         size="sm"
+//       >
+//         <p className="">Navigate</p>
+//         <Navigation className="white" size={16} />
+//       </Button>
+//     </a>
+//   </div>
+// </Card>;
 
 export default UserTripItemCard;
