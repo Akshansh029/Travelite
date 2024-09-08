@@ -17,7 +17,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { db } from "@/service/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { LampContainer } from "@/components/ui/lamp";
+import Overlay from "@/components/Overlay";
 
 const CreateTrip = () => {
   const [currentInput, setCurrentInput] = useState("");
@@ -55,7 +55,7 @@ const CreateTrip = () => {
       .replace("{budget}", budget)
       .replace("{totaldays}", days);
 
-    console.log("Final Prompt:", FINAL_PROMPT);
+    // console.log("Final Prompt:", FINAL_PROMPT);
 
     if (!user) {
       toast.error("Please Sign in First");
@@ -79,7 +79,7 @@ const CreateTrip = () => {
       id: docId,
     });
     setLoading(false);
-    console.log("Trip Data:", TripData);
+    // console.log("Trip Data:", TripData);
     //navigate(`/view-trip/${docId}`)
     router.push(`/view-trip/${docId}`);
   };
@@ -166,163 +166,233 @@ const CreateTrip = () => {
     },
   };
 
-  // useEffect(() => {
-  //   if (selectedDestination) {
-  //     console.log("Selected Destination:", selectedDestination);
-  //   }
-  // }, [selectedDestination]);
-
   return (
-    <motion.div
-      className="w-full sm:px-10 md:px-32 lg:px-56 xl:px-72 flex flex-col items-center gap-6 py-12"
-      initial="hidden"
-      animate="visible"
-    >
+    <>
+      {loading && <Overlay />} {/* Show the overlay when loading */}
       <motion.div
-        className="flex flex-col gap-2 items-center text-center w-full"
-        variants={containerVariants}
+        className="w-full sm:px-10 md:px-32 lg:px-56 xl:px-72 flex flex-col items-center gap-6 py-12"
+        initial="hidden"
+        animate="visible"
       >
-        <h2 className="font-bold text-3xl">
-          Tell us your travel{" "}
-          <span className="bg-indigo-400 text-white px-4 py-2 rounded-lg shadow-lg">
-            preferences 🏖️
-          </span>
-        </h2>
+        <motion.div
+          className="flex flex-col gap-2 items-center text-center w-full"
+          variants={containerVariants}
+        >
+          <h2 className="font-bold text-3xl">
+            Tell us your travel{" "}
+            <span className="bg-indigo-400 text-white px-4 py-2 rounded-lg shadow-lg">
+              preferences 🏖️
+            </span>
+          </h2>
 
-        <p className="mt-3 text-gray-500 text-md">
-          Provide us with basic information, and our trip planner will generate
-          a customized itinerary based on your preferences.
-        </p>
-      </motion.div>
+          <p className="mt-3 text-gray-500 text-md">
+            Provide us with basic information, and our trip planner will
+            generate a customized itinerary based on your preferences.
+          </p>
+        </motion.div>
 
-      <motion.div className="w-[90%]" variants={containerVariants}>
-        {/* Form */}
-        <motion.div className="" variants={containerVariants}>
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl my-3 font-medium">
-              What is your destination of choice?
+        <motion.div className="w-[90%]" variants={containerVariants}>
+          {/* Form */}
+          <motion.div className="" variants={containerVariants}>
+            <div className="flex flex-col gap-2">
+              <h2 className="text-xl my-3 font-medium">
+                What is your destination of choice?
+              </h2>
+              <Input
+                type="text"
+                className="w-full"
+                placeholder="Enter your destination"
+                value={currentInput}
+                onChange={(e) => {
+                  setCurrentInput(e.target.value);
+                  if (!isDropdownOpen) {
+                    setIsDropdownOpen(true); // Reopen the dropdown if the user starts typing again
+                  }
+                }}
+              />
+            </div>
+
+            {isDropdownOpen && predictions.length > 0 && (
+              <ul className="border border-gray-300 mt-2 rounded-md shadow-lg max-h-60 overflow-auto">
+                {predictions.map((prediction, index) => (
+                  <li
+                    key={index}
+                    className="p-2 cursor-pointer hover:bg-gray-100"
+                    onClick={() =>
+                      handleSelectPrediction(prediction.description)
+                    }
+                  >
+                    {prediction.description}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </motion.div>
+
+          {/* Number of days input */}
+          <motion.div
+            className="flex flex-col gap-2"
+            variants={containerVariants}
+          >
+            <h2 className="text-xl my-3 font-md mt-8 font-medium">
+              How many days are you planning for your trip?
             </h2>
             <Input
-              type="text"
-              className="w-full"
-              placeholder="Enter your destination"
-              value={currentInput}
-              onChange={(e) => {
-                setCurrentInput(e.target.value);
-                if (!isDropdownOpen) {
-                  setIsDropdownOpen(true); // Reopen the dropdown if the user starts typing again
-                }
-              }}
+              type="number"
+              min="1"
+              max="10"
+              placeholder="Enter number of days"
+              className="full"
+              value={inputDays}
+              onChange={(e) => setInputDays(e.target.value)}
             />
-          </div>
+          </motion.div>
 
-          {isDropdownOpen && predictions.length > 0 && (
-            <ul className="border border-gray-300 mt-2 rounded-md shadow-lg max-h-60 overflow-auto">
-              {predictions.map((prediction, index) => (
-                <li
-                  key={index}
-                  className="p-2 cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSelectPrediction(prediction.description)}
+          {/* Budget input */}
+          <motion.div variants={containerVariants}>
+            <h2 className="text-xl my-3 font-md mt-8 font-semibold">
+              Choose your budget
+            </h2>
+            <div className="grid grid-cols-3 gap-5 mt-5 cursor-pointer">
+              {SelectBudgetOptions.map((option) => (
+                <motion.div
+                  key={option.id}
+                  className={`p-4 border rounded-lg hover:shadow-2xl ${
+                    inputBudget == option.title && "shadow-lg border-[2px] "
+                  }`}
+                  onClick={() => setInputBudget(option.title)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {prediction.description}
-                </li>
+                  <h2 className="text-3xl">{option.icon}</h2>
+                  <h2 className="font-bold text-lg">{option.title}</h2>
+                  <h2 className="text-sm text-gray-800">{option.desc}</h2>
+                </motion.div>
               ))}
-            </ul>
-          )}
-        </motion.div>
+            </div>
+          </motion.div>
 
-        {/* Number of days input */}
-        <motion.div
-          className="flex flex-col gap-2"
-          variants={containerVariants}
-        >
-          <h2 className="text-xl my-3 font-md mt-8 font-medium">
-            How many days are you planning for your trip?
-          </h2>
-          <Input
-            type="number"
-            min="1"
-            max="10"
-            placeholder="Enter number of days"
-            className="full"
-            value={inputDays}
-            onChange={(e) => setInputDays(e.target.value)}
-          />
-        </motion.div>
+          {/* Number of people input */}
+          <motion.div variants={containerVariants}>
+            <h2 className="text-xl my-3 font-md mt-8 font-semibold">
+              How many people are traveling?
+            </h2>
+            <div className="grid grid-cols-3 gap-5 mt-5 cursor-pointer mb-5">
+              {SelectTravelList.map((option) => (
+                <motion.div
+                  key={option.id}
+                  className={`p-4 border rounded-lg hover:shadow-2xl ${
+                    inputPeople == option.people && "shadow-lg border-[2px]"
+                  }`}
+                  onClick={() => setInputPeople(option.people)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <h2 className="text-3xl">{option.icon}</h2>
+                  <h2 className="font-bold text-lg">{option.title}</h2>
+                  <h2 className="text-sm text-gray-800">{option.desc}</h2>
+                  <h2 className="text-sm text-gray-600 font-thin font-serif mt-2 flex justify-start">
+                    ({option.people})
+                  </h2>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
-        {/* Budget input */}
-        <motion.div variants={containerVariants}>
-          <h2 className="text-xl my-3 font-md mt-8 font-semibold">
-            Choose your budget
-          </h2>
-          <div className="grid grid-cols-3 gap-5 mt-5 cursor-pointer">
-            {SelectBudgetOptions.map((option) => (
-              <motion.div
-                key={option.id}
-                className={`p-4 border rounded-lg hover:shadow-2xl ${
-                  inputBudget == option.title && "shadow-lg border-[2px] "
-                }`}
-                onClick={() => setInputBudget(option.title)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+          {/* Submit button */}
+          <motion.div
+            className="mt-10 justify-end flex"
+            variants={containerVariants}
+          >
+            {loading && (
+              <Button disabled={true} className="w-full py-4 text-base">
+                Generating trip...
+              </Button>
+            )}
+            {!loading && (
+              <Button
+                onClick={handleSubmit}
+                disabled={loading}
+                className={`w-full py-4 text-base`}
               >
-                <h2 className="text-3xl">{option.icon}</h2>
-                <h2 className="font-bold text-lg">{option.title}</h2>
-                <h2 className="text-sm text-gray-800">{option.desc}</h2>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Number of people input */}
-        <motion.div variants={containerVariants}>
-          <h2 className="text-xl my-3 font-md mt-8 font-semibold">
-            How many people are traveling?
-          </h2>
-          <div className="grid grid-cols-3 gap-5 mt-5 cursor-pointer mb-5">
-            {SelectTravelList.map((option) => (
-              <motion.div
-                key={option.id}
-                className={`p-4 border rounded-lg hover:shadow-2xl ${
-                  inputPeople == option.people && "shadow-lg border-[2px]"
-                }`}
-                onClick={() => setInputPeople(option.people)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <h2 className="text-3xl">{option.icon}</h2>
-                <h2 className="font-bold text-lg">{option.title}</h2>
-                <h2 className="text-sm text-gray-800">{option.desc}</h2>
-                <h2 className="text-sm text-gray-600 font-thin font-serif mt-2 flex justify-start">
-                  ({option.people})
-                </h2>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Submit button */}
-        <motion.div
-          className="mt-10 justify-end flex"
-          variants={containerVariants}
-        >
-          {loading ? (
-            <Button disabled={true} className="w-full py-4 text-base">
-              Generating trip...
-            </Button>
-          ) : (
-            <Button
-              onClick={handleSubmit}
-              disabled={loading}
-              className={`w-full py-4 text-base`}
-            >
-              Generate trip ✈️
-            </Button>
-          )}
+                Generate trip ✈️
+              </Button>
+            )}
+          </motion.div>
         </motion.div>
       </motion.div>
-    </motion.div>
+    </>
   );
 };
 
 export default CreateTrip;
+
+// import { useState } from "react";
+// import Overlay from "@/components/Overlay"; // Adjust the import path as needed
+
+// const CreateTrip = () => {
+//   const [loading, setLoading] = useState(false);
+
+//   const handleSubmit = async () => {
+//     if (!selectedDestination || !inputDays || !inputBudget || !inputPeople) {
+//       toast.error("Please fill in all the fields");
+//       return;
+//     }
+//     if (inputDays < 1 || inputDays > 10) {
+//       toast.error("Please enter a valid number of days (1-10)");
+//       return;
+//     }
+//     setFormData({
+//       destination: selectedDestination,
+//       days: inputDays,
+//       budget: inputBudget,
+//       people: inputPeople,
+//     });
+
+//     setLoading(true); // Show the overlay
+
+//     await generateTripPlan(
+//       selectedDestination,
+//       inputDays,
+//       inputBudget,
+//       inputPeople
+//     );
+
+//     // The loading state will be turned off in `generateTripPlan` after the navigation
+//   };
+
+//   const generateTripPlan = async (destination, days, budget, people) => {
+//     // Existing logic to generate the trip plan and save to database
+//     const FINAL_PROMPT = AI_PROMPT.replace("{location}", destination)
+//       .replace("{totaldays}", days)
+//       .replace("{traveller}", people)
+//       .replace("{budget}", budget)
+//       .replace("{totaldays}", days);
+
+//     if (!user) {
+//       toast.error("Please Sign in First");
+//     }
+//     const result = await chatSession.sendMessage(FINAL_PROMPT);
+//     SaveAiTrip(result?.response?.text(), destination, days, budget, people);
+//   };
+
+//   const SaveAiTrip = async (TripData, destination, days, budget, people) => {
+//     setLoading(true);
+//     const docId = Date.now().toString();
+//     const userEmail = user.primaryEmailAddress.emailAddress;
+//     await setDoc(doc(db, "AITrips", docId), {
+//       userSelection: { destination, days, budget, people },
+//       tripData: JSON.parse(TripData),
+//       userEmail: userEmail,
+//       id: docId,
+//     });
+//     setLoading(false);
+//     router.push(`/view-trip/${docId}`);
+//   };
+
+//   return (
+//         {/* Rest of your component */}
+//   );
+// };
+
+// export default CreateTrip;

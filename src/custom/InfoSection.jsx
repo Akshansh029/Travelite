@@ -6,7 +6,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Share2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { LampContainer } from "@/components/ui/lamp";
+import ShareButton from "@/components/ShareButton";
 
 const InfoSection = ({ trip }) => {
   const [imageUrl, setImageUrl] = useState("/plane1.png"); // Default image
@@ -68,10 +68,7 @@ const InfoSection = ({ trip }) => {
           </div>
         </div>
 
-        <Button className="flex gap-2" variant={"default"}>
-          <p className="text-sm text-white">Share</p>
-          <Share2 className="" size={18} />
-        </Button>
+        <ShareButton />
       </div>
     </div>
   );
