@@ -31,6 +31,7 @@ const CreateTrip = () => {
   const [inputPeople, setInputPeople] = useState("");
 
   const { isLoaded, user } = useUser(); // Access user information
+  console.log(user);
 
   const router = useRouter();
 
@@ -62,7 +63,7 @@ const CreateTrip = () => {
     }
     // passing final prompt to gemini model
     const result = await chatSession.sendMessage(FINAL_PROMPT);
-    console.log(result?.response?.text());
+    // console.log(result?.response?.text());
     setLoading(false);
     SaveAiTrip(result?.response?.text(), destination, days, budget, people);
   };
@@ -105,16 +106,16 @@ const CreateTrip = () => {
   };
 
   // for printing value of formdata
-  useEffect(() => {
-    if (
-      formData.destination ||
-      formData.days ||
-      formData.budget ||
-      formData.people
-    ) {
-      console.log("Form Data:", formData);
-    }
-  }, [formData]);
+  // useEffect(() => {
+  //   if (
+  //     formData.destination ||
+  //     formData.days ||
+  //     formData.budget ||
+  //     formData.people
+  //   ) {
+  //     console.log("Form Data:", formData);
+  //   }
+  // }, [formData]);
 
   useEffect(() => {
     if (currentInput.length > 0) {

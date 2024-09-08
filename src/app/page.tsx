@@ -1,20 +1,18 @@
 "use client";
 import { HeroHighlightText } from "@/components/HeroHighlight";
 import { motion, useInView } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ActivityIcon, CookingPotIcon, MapIcon, MapPinned } from "lucide-react";
+import { ActivityIcon, CookingPotIcon, MapIcon } from "lucide-react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { useRef } from "react";
 import { LayoutGridDemo } from "@/components/LayoutGrid";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { useRouter } from "next/navigation";
+import NewTripButton from "@/components/NewTripButton";
 
 export default function Home() {
   const ref1 = useRef(null);
   const ref2 = useRef(null);
-
-  const router = useRouter();
 
   const isInView1 = useInView(ref1, { once: true, amount: 0.3 });
   const isInView2 = useInView(ref2, { once: true, amount: 0.3 });
@@ -44,8 +42,7 @@ export default function Home() {
     <main className="overflow-y-auto landing-bg">
       <BackgroundBeamsWithCollision>
         <motion.section
-          className="pt-10 px-5 min-h-screen landing-bg flex flex-col items-center justify-center text-center"
-          // style={{ height: "calc(100vh - 72px)" }}
+          className="min-h-screen pt-10 px-5 flex flex-col items-center justify-center text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.4, 0.0, 0.2, 1] }}
@@ -75,16 +72,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            <Button
-              variant={"ghost"}
-              onClick={() => router.push("/create-trip")}
-              className="flex gap-3 py-7 px-7 bg-indigo-600 mt-4 hover:bg-[#2653c4] rounded-full"
-            >
-              <MapPinned className="landing-white-text" />
-              <p className="text-neutral-300 text-sm md:text-lg font-medium landing-white-text">
-                Plan a new trip
-              </p>
-            </Button>
+            <NewTripButton />
           </motion.div>
 
           <motion.div
@@ -102,9 +90,11 @@ export default function Home() {
           </motion.div>
         </motion.section>
       </BackgroundBeamsWithCollision>
+
+      {/* Second Section */}
       <section
         ref={ref1}
-        className="hero px-8 md:px-20 min-h-screen flex flex-col items-center justify-center gap-5 text-center overflow-y-hidden"
+        className="py-10 px-8 md:px-20 min-h-screen flex flex-col items-center justify-center gap-5 text-center"
       >
         <motion.div
           initial="hidden"
@@ -114,7 +104,7 @@ export default function Home() {
         >
           <motion.h1
             variants={itemVariants}
-            className="text-3xl lg:text-4xl font-bold dark-heading-text"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold dark-heading-text"
           >
             Features That Guide Your Adventure
           </motion.h1>
@@ -127,6 +117,7 @@ export default function Home() {
             experiences.
           </motion.p>
         </motion.div>
+
         <motion.div
           initial="hidden"
           animate={isInView1 ? "visible" : "hidden"}
@@ -145,6 +136,7 @@ export default function Home() {
               </p>
             </Card>
           </motion.div>
+
           <motion.div variants={itemVariants}>
             <Card className="flex flex-col items-center p-4 h-full bg-neutral-200">
               <ActivityIcon className="w-12 h-12 text-neutral-800" />
@@ -157,6 +149,7 @@ export default function Home() {
               </p>
             </Card>
           </motion.div>
+
           <motion.div variants={itemVariants}>
             <Card className="flex flex-col items-center p-4 h-full bg-neutral-200">
               <CookingPotIcon className="w-12 h-12 text-neutral-800" />
@@ -171,10 +164,9 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
-      <section
-        ref={ref2}
-        className="min-h-screen landing-bg text-white p-8 overflow-hidden"
-      >
+
+      {/* Third Section */}
+      <section ref={ref2} className="min-h-screen landing-bg text-white p-8">
         <motion.div
           initial="hidden"
           animate={isInView2 ? "visible" : "hidden"}
@@ -183,7 +175,7 @@ export default function Home() {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl font-bold text-center mb-4 dark-heading-text"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4 dark-heading-text"
           >
             Uncover Unique Travel Experiences from Across India
           </motion.h2>
@@ -198,6 +190,7 @@ export default function Home() {
             shared by travelers from all over India. See the country through
             their eyes and find the perfect adventure for you.
           </motion.p>
+
           <motion.div variants={itemVariants}>
             <LayoutGridDemo />
           </motion.div>
