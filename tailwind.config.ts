@@ -23,6 +23,9 @@ const config = {
       },
     },
     extend: {
+      height: {
+        "custom-hero": "calc(100vh - 72px)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

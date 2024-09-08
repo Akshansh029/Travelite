@@ -80,7 +80,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/community-trips"
+                  href="/suggested-trips"
                   className="text-sm dark-subheading-text hover:text-[#171717]"
                 >
                   Community Trips
@@ -88,7 +88,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/find-destinations"
+                  href="/create-trip"
                   className="text-sm dark-subheading-text hover:text-[#171717]"
                 >
                   Find Destinations
