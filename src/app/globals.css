@@ -90,22 +90,22 @@
 
 /* Scrollbar container */
 ::-webkit-scrollbar {
-  width: 10px; /* Adjust the width for a smaller look */
+  width: 10px;
 }
 
 /* Track or background */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Light background for the track */
-  border-radius: 10px; /* Optional: round the scrollbar track */
-}
+  background: #f1f1f1;
+  border-radius: 10px;
 
-/* Handle or thumb */
-::-webkit-scrollbar-thumb {
-  background: #888; /* Subtle grey for the handle */
-  border-radius: 10px; /* Rounded handle for a modern look */
-}
+  /* Handle or thumb */
+  ::-webkit-scrollbar-thumb {
+    background: #bebebe;
+    border-radius: 10px;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Darker grey when hovered */
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #bebebe;
+  }
 }

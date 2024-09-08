@@ -4,7 +4,7 @@ import PlaceCardItem from "./PlaceCardItem";
 
 const PlacesToVisit = ({ trip }) => {
   return (
-    <div className="w-full mt-10">
+    <div className="w-full mt-10 px-6">
       <h2 className="font-bold text-2xl mb-4">Places to Visit</h2>
 
       <div className="w-full flex flex-col gap-6">
