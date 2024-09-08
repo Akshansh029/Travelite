@@ -16,7 +16,9 @@ import { useUser } from "@clerk/nextjs";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "@/service/firebaseConfig";
 import { useRouter } from "next/navigation";
-import Timeline from "../../components/HorizontalScroll";
+import { Cover } from "@/components/ui/cover";
+import { motion } from "framer-motion";
+import { LampContainer } from "@/components/ui/lamp";
 
 const CreateTrip = () => {
   const [currentInput, setCurrentInput] = useState("");
@@ -167,10 +169,15 @@ const CreateTrip = () => {
 
   return (
     <div className="w-full sm:px-10 md:px-32 lg:px-56 xl:px-72 flex flex-col items-center gap-6 py-12">
+
       <div className="flex flex-col gap-2 items-center text-center w-full">
+        
         <h2 className="font-bold text-3xl">
-          Tell us your travel preferences 🏖️🌴
+          Tell us your travel <Cover>preferences 🏖️</Cover> 
         </h2>
+        
+      
+
         <p className="mt-3 text-gray-500 text-md">
           Provide us with basic information, and our trip planner will generate
           a customized itinerary based on your preferences.

@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Share2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { LampContainer } from "@/components/ui/lamp";
 
 const InfoSection = ({ trip }) => {
   const [imageUrl, setImageUrl] = useState("/plane1.png"); // Default image
@@ -40,11 +42,13 @@ const InfoSection = ({ trip }) => {
   }, [trip?.userSelection?.destination]);
   return (
     <div>
+      
       <img
         src={imageUrl}
         alt="placeholder"
-        className="h-[330px] w-full object-cover rounded-xl"
+        className="h-[330px] w-full object-cover rounded-4xl"
       />
+     
 
       <div className="flex justify-between items-center">
         {/* showing hotel info */}
