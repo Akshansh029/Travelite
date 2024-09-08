@@ -11,50 +11,47 @@ const Page = () => {
   const CARDS = [
     {
       id: 0,
-      name: "Manu Arora",
-      image:'/wheel.jpg',
-      designation: "Senior Software Engineer",
+      // name: "Manu Arora",
+      image: "/wheel.jpg",
+      // designation: "Senior Software Engineer",
       content: (
         <p>
-          These cards are amazing, <Highlight>I want to use them</Highlight> in my
-          project. Framer motion is a godsend ngl tbh fam 🙏
+          These cards are amazing, <Highlight>I want to use them</Highlight> in
+          my project. Framer motion is a godsend ngl tbh fam 🙏
         </p>
       ),
     },
     {
       id: 1,
-      name: "Elon Musk",
-      image:'/wheel.jpg',
-      designation: "Senior Shitposter",
+      // name: "Elon Musk",
+      image: "/konark3.jpg",
+      // designation: "Senior Shitposter",
       content: (
         <p>
           I don't like this Twitter thing,{" "}
           <Highlight>deleting it right away</Highlight> because yolo. Instead, I
-          would like to call it <Highlight>X.com</Highlight> so that it can easily
-          be confused with adult sites.
+          would like to call it <Highlight>X.com</Highlight> so that it can
+          easily be confused with adult sites.
         </p>
       ),
     },
     {
       id: 2,
-      name: "Tyler Durden",
-      image:'/wheel.jpg',
-      designation: "Manager Project Mayhem",
+      // name: "Tyler Durden",
+      image: "/konark2.jpg",
+      // designation: "Manager Project Mayhem",
       content: (
         <p>
-          The first rule of <Highlight>Fight Club</Highlight> is that you do not talk about fight
-          club. The second rule of <Highlight>Fight Club</Highlight> is that you DO NOT TALK about fight
+          The first rule of <Highlight>Fight Club</Highlight> is that you do not
+          talk about fight club. The second rule of{" "}
+          <Highlight>Fight Club</Highlight> is that you DO NOT TALK about fight
           club.
         </p>
       ),
     },
   ];
 
-  const images = [
-    "/konark1.webp",
-    "konark2.jpg",
-    "konark3.jpg",
-  ];
+  const images = ["/konark1.webp", "konark2.jpg", "konark3.jpg"];
 
   const content = [
     {
@@ -122,7 +119,7 @@ const Page = () => {
   ];
 
   return (
-    <>
+    <div className="flex flex-col">
       <ImagesSlider className="h-[40rem]" images={images}>
         <motion.div
           initial={{ opacity: 0, y: -80 }}
@@ -146,7 +143,7 @@ const Page = () => {
               <h1 className="text-4xl font-semibold text-black dark:text-white">
                 Explore the Map Virtually
                 <br />
-                <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none">
+                <span className="text-4xl md:text-[4.5rem] font-bold mt-1 leading-none">
                   Experience in Street View
                 </span>
               </h1>
@@ -175,13 +172,11 @@ const Page = () => {
           Explore Facts <br /> the Right Way
         </motion.h1>
       </LampContainer>
-      <div className="p-10">
-        {/* <StickyScroll content={content} /> */}
-      </div>
+      <div className="p-10">{/* <StickyScroll content={content} /> */}</div>
       <div className="h-[40rem] flex items-center justify-center w-full">
         <CardStack items={CARDS} />
       </div>
-    </>
+    </div>
   );
 };
 
