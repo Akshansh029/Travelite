@@ -1,5 +1,5 @@
 "use client";
-import { SignInButton, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignedOut, SignedIn, UserButton } from "@clerk/nextjs";
 import Logo from "./Logo";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -30,12 +30,19 @@ export default function Navbar() {
               <SignInButton />
             </Button>
           </SignedOut>
-          <SignInButton>
+
+          <SignedIn>
             <div className="flex items-center">
-            <Button className="text-white bg-black hover:bg-[#232727] hover:text-white mr-3" variant="ghost">My Trips</Button>
-            <UserButton />
+              <Button
+                className="text-white bg-black hover:bg-[#232727] hover:text-white mr-3"
+                variant="ghost"
+                onClick={() => router.push('/past-trips')}
+              >
+                My Trips
+              </Button>
+              <UserButton />
             </div>
-          </SignInButton>
+          </SignedIn>
         </div>
       </div>
     </nav>
