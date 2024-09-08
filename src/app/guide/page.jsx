@@ -11,27 +11,27 @@ const Page = () => {
   const CARDS = [
     {
       id: 0,
+      image: "/konark2.jpg",
+      audio:"/magnet.mp3",
+      content: (
+        <p>
+          The temple originally had a <Highlight> massive magnet </Highlight> at its topmost section, possibly above the central sanctum or the Vimana (tower), which is no longer standing.
+        </p>
+      ),  
+    },
+    {
+      id: 1,
       image: "/wheel.jpg",
       audio:"/wheel.mp3",
       content: (
         <p>
            The iconic chariot wheels are located on the sides of the temple’s main platform. The temple is designed as a <Highlight>colossal chariot of the Sun God </Highlight>, and the 24 wheels are spread out evenly on either side of the temple.
         </p>
-      ),
-    },
-    {
-      id: 1,
-      image: "/konark3.jpg",
-      audio:"/magnet.mp3",
-      content: (
-        <p>
-          The temple originally had a <Highlight> massive magnet </Highlight> at its topmost section, possibly above the central sanctum or the Vimana (tower), which is no longer standing.
-        </p>
-      ),
+      ), 
     },
     {
       id: 2,
-      image: "/konark2.jpg",
+      image: "/sun.jpg",
       audio:"/sun_feet.mp3",
       content: (
         <p>
@@ -41,7 +41,7 @@ const Page = () => {
     },
     {
       id: 3,
-      image: "/konark2.jpg",
+      image: "/sculptures.jpg",
       audio:"/dancing_sculptures.mp3",
       content: (
         <p>
@@ -173,9 +173,9 @@ const Page = () => {
           
         </motion.h1>
       </LampContainer>
-      <div className="p-10">{/* <StickyScroll content={content} /> */}</div>
-      <div className="h-[40rem] flex items-center justify-center w-full">
-        <CardStack items={CARDS} />
+      
+      <div className="h-[50rem]  flex justify-center w-full pt-28">
+      <CardStack items={CARDS}  />
       </div>
     </div>
   );
