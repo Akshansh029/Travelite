@@ -128,7 +128,7 @@ export default function DarkTripFinder() {
   ];
 
   return (
-    <div className="min-h-screen landing-bg text-gray-200 px-24 ">
+    <div className="min-h-screen landing-bg text-gray-200 sm:px-10 md:px-32 lg:px-44 xl:px-56 px-5 py-10">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-4 dark-heading-text">
           Trip finder
@@ -137,71 +137,45 @@ export default function DarkTripFinder() {
           Find trips created by other users and get inspired for{" "}
           <span className="text-indigo-600 font-semibold">your next trip!</span>
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {trips.map((trip) => (
             <Card
+              className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-xl p-4 flex flex-col gap-5 cursor-pointer w-full h-fit justify-center"
               key={trip.id}
-              className="bg-transparent border-gray-700 max-h-"
             >
-              <CardContent className="p-0">
-                <Image
-                  src={trip.image}
-                  alt={trip.title}
-                  width={300}
-                  height={200}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h2 className="font-semibold text-lg mb-2 dark-heading-text">
-                    {trip.title}
-                  </h2>
-                  <p className="text-sm dark-subheading-text mb-4">
-                    {trip.description}
-                  </p>
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-start py-2 border-t border-gray-700 space-x-2">
-                <MapPin className="dark-subheading-text" size={18} />
-                <span className="dark-subheading-text text-sm">
-                  {trip.destination}
-                </span>
-              </CardFooter>
+              <img
+                src="/hotel.png"
+                className="aspect-square object-cover rounded-lg max-h-[200px]"
+                alt="Place Image"
+              />
+              <div className="flex-grow mt-2">
+                <h2 className="font-bold text-xl dark-heading-text">Jaipur</h2>
+                <p className="text-sm dark-heading-text truncate ...">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+                  sapiente suscipit, atque a similique cupiditate reiciendis
+                  quia nemo possimus est! Dicta molestias fuga cumque, ipsa
+                  deserunt quo et dolorum quisquam.
+                </p>
+                <p className="mt-2 text-sm font-semibold dark-heading-text">
+                  ⭐ 4.4 Rating
+                </p>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=jaipur`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    className="mt-3 border-gray-400 border-[1px] rounded-lg gap-2"
+                    variant={"default"}
+                    size="sm"
+                  >
+                    <p className="">Navigate</p>
+                    <Navigation className="white" size={16} />
+                  </Button>
+                </a>
+              </div>
             </Card>
           ))}
-          <div className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-xl p-4 flex flex-col gap-5 cursor-pointer w-full h-fit justify-center">
-            <img
-              src="/hotel.png"
-              className="aspect-square object-cover rounded-lg max-h-[200px]"
-              alt="Place Image"
-            />
-            <div className="flex-grow mt-2">
-              <h2 className="font-bold text-xl dark-heading-text">Jaipur</h2>
-              <p className="text-sm dark-heading-text truncate ...">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-                sapiente suscipit, atque a similique cupiditate reiciendis quia
-                nemo possimus est! Dicta molestias fuga cumque, ipsa deserunt
-                quo et dolorum quisquam.
-              </p>
-              <p className="mt-2 text-sm font-semibold dark-heading-text">
-                ⭐ 4.4 Rating
-              </p>
-
-              <a
-                href={`https://www.google.com/maps/search/?api=1&query=jaipur`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  className="mt-3 border-gray-400 border-[1px] rounded-lg gap-2"
-                  variant={"default"}
-                  size="sm"
-                >
-                  <p className="">Navigate</p>
-                  <Navigation className="white" size={16} />
-                </Button>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </div>

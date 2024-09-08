@@ -5,7 +5,7 @@ import { db } from "@/service/firebaseConfig";
 import { useUser } from "@clerk/nextjs";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState, useCallback } from "react";
-import {SkeletonCard} from "@/custom/SkeletonCard";
+import { SkeletonCard } from "@/custom/SkeletonCard";
 import { toast } from "sonner";
 import UserTripItemCard from "@/custom/UserTripItemCard";
 
@@ -28,7 +28,10 @@ const PastTrips = () => {
       // Clear previous trips before fetching new ones
       setUserTrips([]);
 
-      const q = query(collection(db, "AITrips"), where("userEmail", "==", userEmail));
+      const q = query(
+        collection(db, "AITrips"),
+        where("userEmail", "==", userEmail)
+      );
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.empty) {
@@ -40,7 +43,6 @@ const PastTrips = () => {
         });
         setUserTrips(trips); // Set fetched trips
       }
-
     } catch (error) {
       console.error("Error fetching trips:", error);
       toast.error("Failed to fetch trips.");
@@ -57,11 +59,19 @@ const PastTrips = () => {
   }, [userEmail, getUserTrips]);
 
   return (
-    <div className="sm:px-10 md:px-32 lg:px-56 xl:px-72 px-5 mt-10">
-      <h2 className="font-bold text-3xl">My Trips</h2>
+    <div className="landing-bg sm:px-10 md:px-32 lg:px-44 xl:px-56 px-5 py-10">
+      <div className="flex flex-col gap-2 text-center">
+        <h2 className="font-bold text-3xl">My Trips</h2>
+        <p className="font-normal">
+          Find all your previous adventures in{" "}
+          <span className="text-indigo-600 font-semibold">one place!</span>{" "}
+          Explore destinations, dates, and highlights from your completed trips
+          to relive memories and plan your next journey.
+        </p>
+      </div>
 
       {loading && (
-        <div className="flex gap-5 mt-10">
+        <div className="flex gap-5 mt-8">
           <SkeletonCard />
           <SkeletonCard />
           <SkeletonCard />
@@ -72,7 +82,7 @@ const PastTrips = () => {
         <p className="mt-5 text-gray-500">You have no past trips.</p>
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10 mb-10">
+      <div className="grid grids-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10 ">
         {userTrips.map((trip) => (
           <UserTripItemCard key={trip.id} trip={trip} />
         ))}
