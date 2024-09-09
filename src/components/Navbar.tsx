@@ -27,6 +27,13 @@ export default function Navbar() {
           >
             Suggested trips
           </Button>
+          <Button
+            onClick={() => router.push("/guide")}
+            variant="ghost"
+            className="hidden md:block text-white bg-black hover:bg-[#232727] hover:text-white"
+          >
+            Virtual Tour
+          </Button>
 
           {user.user && (
             <Button
