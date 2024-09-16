@@ -55,9 +55,26 @@ export const CardStack = ({
     };
   };
 
+  const handlePause = () => {
+    setPlaying(false);
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  };
+
   const handleStart = () => {
     if (!playing) {
       setPlaying(true);
+      if (audioRef.current) {
+        audioRef.current.play();
+      }
+    } else {
+      if (currentIndex < cards.length - 1) {
+        playAudioAndChangeCard();
+      } else {
+        setCurrentIndex(0);
+        playAudioAndChangeCard();
+      }
     }
   };
 
@@ -72,8 +89,12 @@ export const CardStack = ({
           }}
           animate={{
             top: index === currentIndex ? 0 : -CARD_OFFSET,
-            scale: index === currentIndex ? 1 : 1 - (cards.length - index) * SCALE_FACTOR,
-            zIndex: index === currentIndex ? cards.length : cards.length - index,
+            scale:
+              index === currentIndex
+                ? 1
+                : 1 - (cards.length - index) * SCALE_FACTOR,
+            zIndex:
+              index === currentIndex ? cards.length : cards.length - index,
           }}
         >
           <div className="rounded-2xl overflow-hidden">
@@ -86,9 +107,22 @@ export const CardStack = ({
           <div className="font-normal text-sm text-neutral-700 dark:text-neutral-200">
             {card.content}
           </div>
-          <Button variant={"default"} onClick={handleStart}>
-            Start Loop
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              variant={"default"}
+              className=" hover:bg-[#2653c4] rounded-lg p-2"
+              onClick={handleStart}
+            >
+              Start Loop
+            </Button>
+            <Button
+              variant={"default"}
+              className=" hover:bg-[#2653c4] rounded-lg p-2"
+              onClick={handlePause}
+            >
+              Pause
+            </Button>
+          </div>
         </motion.div>
       ))}
       <audio ref={audioRef} />

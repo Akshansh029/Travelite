@@ -12,40 +12,57 @@ const Page = () => {
     {
       id: 0,
       image: "/konark2.jpg",
-      audio:"/magnet.mp3",
+      audio: "/magnet.mp3",
       content: (
         <p>
-          The temple originally had a <Highlight> massive magnet </Highlight> at its topmost section, possibly above the central sanctum or the Vimana (tower), which is no longer standing.
+          The temple originally had a <Highlight> massive magnet </Highlight> at
+          its topmost section, possibly above the central sanctum or the Vimana
+          (tower), which is no longer standing.
         </p>
-      ),  
+      ),
     },
     {
       id: 1,
       image: "/wheel.jpg",
-      audio:"/wheel.mp3",
+      audio: "/wheel.mp3",
       content: (
         <p>
-           The iconic chariot wheels are located on the sides of the temple’s main platform. The temple is designed as a <Highlight>colossal chariot of the Sun God </Highlight>, and the 24 wheels are spread out evenly on either side of the temple.
+          The iconic chariot wheels are located on the sides of the temple’s
+          main platform. The temple is designed as a{" "}
+          <Highlight>colossal chariot of the Sun God </Highlight>, and the 24
+          wheels are spread out evenly on either side of the temple.
         </p>
-      ), 
+      ),
     },
     {
       id: 2,
       image: "/sun.jpg",
-      audio:"/sun_feet.mp3",
+      audio: "/sun_feet.mp3",
       content: (
         <p>
-          Inside the main sanctum of the temple, there were once three statues of the   <Highlight> Sun God, Surya, positioned to capture the rays of the rising, noon, and setting sun.</Highlight> The feet of these statues, representing Surya’s various poses, are significant. 
+          Inside the main sanctum of the temple, there were once three statues
+          of the{" "}
+          <Highlight>
+            {" "}
+            Sun God, Surya, positioned to capture the rays of the rising, noon,
+            and setting sun.
+          </Highlight>{" "}
+          The feet of these statues, representing Surya’s various poses, are
+          significant.
         </p>
       ),
     },
     {
       id: 3,
       image: "/sculptures.jpg",
-      audio:"/dancing_sculptures.mp3",
+      audio: "/dancing_sculptures.mp3",
       content: (
         <p>
-          These are found on the walls of the<Highlight> Natya Mandapa (Dance Hall) </Highlight>and other parts of the temple. The Natya Mandapa was specifically built as a platform for dance performances in honor of the Sun God, and hence the walls are adorned with dancing figures in various classical poses. 
+          These are found on the walls of the
+          <Highlight> Natya Mandapa (Dance Hall) </Highlight>and other parts of
+          the temple. The Natya Mandapa was specifically built as a platform for
+          dance performances in honor of the Sun God, and hence the walls are
+          adorned with dancing figures in various classical poses.
         </p>
       ),
     },
@@ -170,12 +187,11 @@ const Page = () => {
           className="mt-8 bg-gradient-to-br from-slate-200/50 to-slate-900 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
         >
           Explore Facts <br /> the Right Way
-          
         </motion.h1>
       </LampContainer>
-      
-      <div className="h-[50rem]  flex justify-center w-full pt-28">
-      <CardStack items={CARDS}  />
+
+      <div className="h-[50rem] flex justify-center w-full pt-28">
+        <CardStack items={CARDS} />
       </div>
     </div>
   );
