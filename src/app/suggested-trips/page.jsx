@@ -16,6 +16,7 @@ export default function DarkTripFinder() {
   const [emailAddress, setEmailAddress] = useState("");
   const [suggestedTrips, setSuggestedTrips] = useState([]);
   const [imageUrl, setImageUrl] = useState("/hotel1.png");
+  const [place, setPlace] = useState(null);
 
   // Function to fetch image from Unsplash API
   const fetchImage = async (placeName) => {
@@ -51,12 +52,19 @@ export default function DarkTripFinder() {
     if (isLoaded && isSignedIn && user?.primaryEmailAddress?.emailAddress) {
       const timeoutId = setTimeout(() => {
         setEmailAddress(user.primaryEmailAddress.emailAddress);
-        console.log("Email fetched after 2 seconds: ", user.primaryEmailAddress.emailAddress);
+        console.log(
+          "Email fetched after 2 seconds: ",
+          user.primaryEmailAddress.emailAddress
+        );
       }, 2000);
 
       return () => clearTimeout(timeoutId); // Clean up the timeout
     }
   }, [isLoaded, isSignedIn, user]);
+
+  // useEffect(() => {
+  //   fetchImage(place);
+  // }, [place]);
 
   // Function to search user trips
   const searchUserTrips = async (userEmail) => {
@@ -64,7 +72,10 @@ export default function DarkTripFinder() {
       console.log("Searching trips for user: ", userEmail);
 
       // Create a query to fetch trips where the email matches userEmail
-      const q = query(collection(db, "AITrips"), where("userEmail", "==", userEmail));
+      const q = query(
+        collection(db, "AITrips"),
+        where("userEmail", "==", userEmail)
+      );
 
       // Get the documents that match the query
       const querySnapshot = await getDocs(q);
@@ -87,6 +98,7 @@ export default function DarkTripFinder() {
         const lastTrip = lastDestination.split(",")[0];
 
         fetchSuggestedTrips(lastTrip);
+        setPlace(lastTrip);
       } else {
         console.log("No trips found for user: ", userEmail);
       }
@@ -99,7 +111,9 @@ export default function DarkTripFinder() {
   const fetchSuggestedTrips = async (destination) => {
     try {
       const result = await axios.get(
-        `https://place-recommender.onrender.com/api/cluster?location_name=${encodeURIComponent(destination)}`
+        `https://place-recommender.onrender.com/api/cluster?location_name=${encodeURIComponent(
+          destination
+        )}`
       );
 
       setSuggestedTrips(result.data.cluster); // Set the fetched suggested trips
@@ -128,15 +142,19 @@ export default function DarkTripFinder() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {suggestedTrips.slice(0, 3).map((trip, index) => (
             <div key={index}>
-              <Card className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-xl p-4 flex flex-col gap-5 cursor-pointer w-full  justify-center h-full">
+              <Card className="shadow-[1px_1px_6px_2px_rgba(0,_0,_0,_0.1)] hover:shadow-[1px_1px_8px_5px_rgba(0,_0,_0,_0.1)] rounded-xl p-4 flex flex-col gap-5 cursor-pointer w-full justify-center h-full">
                 <img
                   src={imageUrl}
                   className="aspect-square object-cover rounded-lg max-h-[200px]"
                   alt="Place Image"
                 />
-                <div className="flex-grow mt-2">
-                  <h2 className="font-bold text-xl dark-heading-text">{trip}</h2>
-                  <p className="mt-2 text-sm font-semibold dark-heading-text">⭐ 4.4 Rating</p>
+                <div className="flex-grow mt-2 justify-between h-full">
+                  <h2 className="font-bold text-xl dark-heading-text">
+                    {trip}
+                  </h2>
+                  <p className="mt-2 text-sm font-semibold dark-heading-text">
+                    ⭐ 4.4 Rating
+                  </p>
                 </div>
               </Card>
             </div>

@@ -65,6 +65,7 @@ export default function Navbar() {
                   href="/suggested-trips"
                 />
               </UserButton.MenuItems>
+              Sign in
             </UserButton>
           </SignedIn>
         </div>
