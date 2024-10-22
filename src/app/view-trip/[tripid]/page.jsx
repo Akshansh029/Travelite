@@ -9,8 +9,8 @@ import Hotels from "../../../custom/Hotels";
 import PlacesToVisit from "../../../custom/PlaceToVisit";
 import dynamic from "next/dynamic"; // Import dynamic for client-side rendering
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
-import { Marker, Popup } from "react-leaflet"; // Import Marker and Popup
 import L from "leaflet";
+import BookFlight from "@/components/BookFlight";
 
 // Dynamically import MapContainer and TileLayer to disable SSR
 const MapContainer = dynamic(
@@ -135,6 +135,7 @@ const ViewTrip = ({ params }) => {
       >
         <div style={scrollContainerStyle}>
           <InfoSection trip={trip} />
+          <BookFlight />
           <Hotels trip={trip} />
           <PlacesToVisit trip={trip} />
         </div>
